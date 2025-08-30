@@ -46,7 +46,7 @@ Arguments
 Argument	Description
 
 ```bash
---n <int>	Number of points in the spiral (default: 200)
+--n <int>	Number of points in the spiral (default: 17)
 --no-rays	Hide radial lines from the origin
 --no-annotations	Hide all labels (√n on rays and 1 on outer lines)
 --outfile <filename>	Save the plot to the results/ folder with the given file name (e.g., --outfile snail.png)
