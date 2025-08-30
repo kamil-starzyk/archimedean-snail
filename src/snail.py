@@ -1,6 +1,8 @@
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+import argparse
+import os
 
 def spiral_points(n: int):
     """
@@ -16,7 +18,7 @@ def spiral_points(n: int):
         pts[k] = [x + vx, y + vy]
     return pts
 
-def plot_snail(n=200, rays=True, annotate=True):
+def plot_snail(n=17, rays=True, annotate=True):
     pts = spiral_points(n)
     xs, ys = pts[:, 0], pts[:, 1]
 
@@ -36,26 +38,68 @@ def plot_snail(n=200, rays=True, annotate=True):
                     fontsize=8,
                     ha="center", va="center"
                 )
+    if annotate:
+        for i in range(1, len(pts)):
+            x1, y1 = pts[i - 1]
+            x2, y2 = pts[i]
+            xm, ym = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(xm, ym, "1", fontsize=7, color="blue", ha="center", va="center")
 
     # Draw outer connecting lines with "1" labels
-    for i in range(1, len(pts)):
-        x1, y1 = pts[i - 1]
-        x2, y2 = pts[i]
-        xm, ym = (x1 + x2) / 2, (y1 + y2) / 2  # midpoint
-        ax.text(
-            xm, ym,
-            "1",
-            fontsize=7,
-            color="blue",
-            ha="center", va="center"
-        )
+
 
     ax.set_aspect("equal", adjustable="box")
     ax.set_title(f"Archimedean Snail (N={n})")
     ax.legend()
     plt.show()
+    return fig, ax
 
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Plot the Archimedean Snail (Spiral of Theodorus)."
+    )
+    parser.add_argument(
+        "--n", type=int, default=17,
+        help="Number of points (default: 17)"
+    )
+    parser.add_argument(
+        "--no-rays", action="store_true",
+        help="Hide the radial lines"
+    )
+    parser.add_argument(
+        "--no-annotations", action="store_true",
+        help="Hide all labels (√n on rays and 1 on lines)"
+    )
+    parser.add_argument(
+        "--outfile", type=str, default=None,
+        help="File name to save the plot (will be saved in 'results/' folder)"
+    )
+    parser.add_argument(
+        "--no-show", action="store_true",
+        help="Do not display the interactive window"
+    )
+
+    args = parser.parse_args()
+
+    fig, ax = plot_snail(
+        n=args.n,
+        rays=not args.no_rays,
+        annotate=not args.no_annotations
+    )
+
+    if args.outfile:
+        output_folder = "results"
+        os.makedirs(output_folder, exist_ok=True)
+        full_path = os.path.join(output_folder, args.outfile)
+        fig.savefig(full_path, dpi=200, bbox_inches="tight")
+        print(f"Saved plot to {full_path}")
+
+    if not args.no_show:
+        import matplotlib.pyplot as plt
+        plt.show()
 
 
 if __name__ == "__main__":
-    plot_snail(17)
+    main()
