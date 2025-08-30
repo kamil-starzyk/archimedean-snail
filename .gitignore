@@ -58,5 +58,5 @@ coverage.xml
 Thumbs.db
 
 
-out/*
-!out/.gitkeep
+results/*
+!results/.gitkeep
