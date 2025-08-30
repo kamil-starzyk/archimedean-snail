@@ -3,7 +3,7 @@
 **Archimedean Snail** is a Python program that plots the **Spiral of Theodorus**, also known as the square-root spiral.  
 It visualizes a sequence of right triangles where each hypotenuse is √n and the legs are connected with unit-length segments.  
 
-![Spiral Preview](results/preview.png)
+![Spiral Preview](preview.png)
 
 ---
 
