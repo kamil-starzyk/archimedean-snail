@@ -49,7 +49,7 @@ Argument	Description
 --n <int>	Number of points in the spiral (default: 200)
 --no-rays	Hide radial lines from the origin
 --no-annotations	Hide all labels (√n on rays and 1 on outer lines)
---outfile <filename>	Save the plot to the out/ folder with the given file name (e.g., --outfile snail.png)
+--outfile <filename>	Save the plot to the results/ folder with the given file name (e.g., --outfile snail.png)
 --no-show	Do not display the interactive plot window
 ```
 
